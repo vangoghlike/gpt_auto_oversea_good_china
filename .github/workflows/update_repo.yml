@@ -2,7 +2,7 @@ name: Auto Update Data
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 매일 자정에 실행
+    - cron: '0 15 * * *'  # 매일 자정에 실행
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
 
       - name: 데이터 생성 (예제)
         run: |
-          TODAY=$(date +'%Y-%m-%d')
+          TODAY=$(date -u -d '9 hours' +'%Y-%m-%d')  # UTC+9 (한국 시간) 적용
           mkdir -p "$TODAY"
           echo "1688 최신 인기 제품 데이터" > "$TODAY/data.txt"
           echo "✅ 데이터 파일이 생성되었습니다: $TODAY/data.txt"
